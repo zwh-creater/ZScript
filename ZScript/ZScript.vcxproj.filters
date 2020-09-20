@@ -18,7 +18,16 @@
     <ClCompile Include="src\zobj\zobject.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\zobj\zbas.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
     <ClCompile Include="ZScript.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\run\func.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\run\run.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -27,6 +36,18 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="include\def.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\zbas.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\sys.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\run.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\func.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
