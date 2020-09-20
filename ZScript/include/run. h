@@ -1,0 +1,9 @@
+#ifndef __RUN_H
+#define __RUN_H
+
+#include "def.h"
+#include "zobject.h"
+
+ZSAPI zsSetPosition(zbas_ptr proc,zbas_uint pos);
+
+#endif
