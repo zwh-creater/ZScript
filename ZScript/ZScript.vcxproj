@@ -93,6 +93,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <CompileAs>CompileAsC</CompileAs>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -108,6 +109,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <CompileAs>CompileAsC</CompileAs>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -123,6 +125,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <CompileAs>CompileAsC</CompileAs>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -138,6 +141,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <CompileAs>CompileAsC</CompileAs>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -148,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\run\func.c" />
+    <ClCompile Include="src\run\proc.c" />
     <ClCompile Include="src\run\run.c" />
     <ClCompile Include="src\zobj\zbas.c" />
     <ClCompile Include="src\zobj\zobject.c" />
@@ -155,7 +160,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\def.h" />
+    <ClInclude Include="include\error.h" />
     <ClInclude Include="include\func.h" />
+    <ClInclude Include="include\proc.h" />
     <ClInclude Include="include\run.h" />
     <ClInclude Include="include\sys.h" />
     <ClInclude Include="include\zbas.h" />

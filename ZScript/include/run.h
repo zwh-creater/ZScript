@@ -3,6 +3,7 @@
 #include "def.h"
 #include "func.h"
 
-ZSAPI zsCallFunc();
+ZSAPI void zsCallFunc();
+
 
 #endif // !__RUN_H

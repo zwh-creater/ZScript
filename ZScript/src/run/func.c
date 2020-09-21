@@ -1,12 +1,16 @@
 #include "..\..\include\func.h"
 
-ZSAPI zbas_ptr zsCreateFunc()
+ZSAPI ZObject* zsCreateFunc()
 {
-	return zsCreateArray(512);
+	ZS_CREATE(z, ZObject);
+	if (z != NULL) {
+		z->m_typecode = 'func';
+		z->m_value = zsCreateArray(512);
+	}
+	return z;
 }
 
-ZSAPI void zsPushCommand(zbas_ptr func,zsline l)
+ZSAPI void zsWriteFunc(ZObject* func,zbas_ptr v)
 {
-	zsArrayPush(func, l.m_type);
-	zsArrayPush(func, l.m_arg);
+	zsArrayPush((zbas_array*)func->m_value,(zbas_uint)v);
 }

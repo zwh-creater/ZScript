@@ -2,22 +2,24 @@
 #define  __FUNC_H
 #include "def.h"
 #include "zbas.h"
+#include "zobject.h"
 
-typedef struct {
-	zbas_ptr m_type;
-	//	1:copy memory
-	//	2:parse expression
-	//	3:
-	//
-	//
-	//
-	//
-	//
-	//
-	zbas_ptr m_arg;
-}zsline;
+ZSAPI ZObject* zsCreateFunc();
+ZSAPI void zsWriteFunc(ZObject* func,zbas_ptr v);
 
-ZSAPI zbas_ptr zsCreateFunc();
-ZSAPI void zsPushCommand(zbas_ptr func,zsline l);
+///
+/// 'var':
+/// 'call':function pointer
+/// 'add':number1,number2,number3
+/// 'sub':number1,number2,number3
+/// 'str':str1,str2
+/// 'ret':return value
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
 
-#endif // ! __FUNC_H
+#endif // NOT  __FUNC_H

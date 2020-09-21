@@ -30,6 +30,9 @@
     <ClCompile Include="src\run\run.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\run\proc.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\zobject.h">
@@ -48,6 +51,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="include\func.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\proc.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\error.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

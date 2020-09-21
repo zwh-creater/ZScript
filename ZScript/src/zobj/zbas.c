@@ -88,7 +88,7 @@ ZSAPI zbas_ptr zsChainPush(zbas_ptr node, zbas_ptr value)
 
 ZSAPI zbas_ptr zsCreateArray(zbas_uint n)
 {
-	ZS_CREATE(arr,zbas_array);
+	ZS_CREATE(arr, zbas_array);
 	if (arr != NULL) {
 		arr->m_data = malloc(n * sizeof(zbas_ptr));
 		arr->m_size = n;
