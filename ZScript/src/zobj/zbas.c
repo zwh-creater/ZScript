@@ -35,6 +35,22 @@ ZSAPI void zsSetString(zbas_ptr p, const char* src, zbas_uint n)
 	}
 }
 
+ZSAPI void zsStringCat(zbas_ptr p, const char* src, zbas_uint n)
+{
+	if (p != NULL) {
+		zbas_uint m = ((zbas_lpstr)p)->m_top;
+		for (zbas_uint i = 0; i < n; i++) {
+			((zbas_lpstr)p)->m_data[m+i] = src[i];
+		}
+		((zbas_lpstr)p)->m_top = m+n;
+	}
+}
+
+ZSAPI zbas_uint zsGetChar(zbas_ptr p, zbas_uint n)
+{
+	return ((zbas_lpstr)p)->m_data[n];
+}
+
 ZSAPI zbas_bool zsCompare(zbas_lpstr str1, zbas_lpstr str2)
 {
 	zbas_uint i;

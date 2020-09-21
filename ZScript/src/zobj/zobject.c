@@ -12,8 +12,6 @@ ZSAPI ZObject* zsCreateObject(zbas_ptr typecode)
 	return z;
 }
 
-#include <stdio.h>
-
 ZSAPI void zsDeleteObject(ZObject* z)
 {
 	if (z != NULL) {

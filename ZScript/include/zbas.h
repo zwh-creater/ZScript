@@ -36,6 +36,10 @@ ZSAPI zbas_lpstr zsCreateString(zbas_uint n);
 ZSAPI void zsDeleteString(zbas_ptr p);
 ZSAPI void zsSetString(zbas_ptr p, const char* src, zbas_uint n);
 
+ZSAPI void zsStringCat(zbas_ptr p, const char* src, zbas_uint n);
+
+ZSAPI zbas_uint zsGetChar(zbas_ptr p, zbas_uint n);
+
 ZSAPI zbas_bool zsCompare(zbas_lpstr str1, zbas_lpstr str2);
 
 typedef unsigned long zbas_dword;

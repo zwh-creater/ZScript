@@ -3,7 +3,6 @@
 
 #include <stdio.h>
 
-#define PRINT(fmt,args)	printf(fmt,args)
 #define PRINT_S(str)	printf("%s",str)
 #define PRINT_F(f)		printf("%f",f)
 

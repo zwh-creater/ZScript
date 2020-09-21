@@ -5,12 +5,12 @@ ZSAPI ZObject* zsCreateFunc()
 	ZS_CREATE(z, ZObject);
 	if (z != NULL) {
 		z->m_typecode = 'func';
-		z->m_value = zsCreateArray(512);
+		z->m_value = zsCreateString(512);
 	}
 	return z;
 }
 
-ZSAPI void zsWriteFunc(ZObject* func,zbas_ptr v)
+ZSAPI void zsWriteFunc(ZObject* func,zbas_ptr src,zbas_uint n)
 {
-	zsArrayPush((zbas_array*)func->m_value,(zbas_uint)v);
+	zsStringCat(func->m_value, src, n);
 }

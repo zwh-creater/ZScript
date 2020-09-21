@@ -9,7 +9,7 @@
 
 typedef struct {
 	zbas_ptr m_vars;
-	zbas_ptr m_pointer;
+	zbas_uint m_pointer;
 	ZObject* m_func;
 }ZProc;
 

@@ -9,13 +9,13 @@ ZSAPI ZProc* zsCreateProc(ZObject* func)
         z->m_vars = zsCreateArray(32);
         int i;
         for (i = 0; i < top; i++) {
-            if (instruction == 'var') {
+            if (instruction == 'v') {
                   zsAppendVar(z, zsCreateNumber(0.0f));
                   instruction = 0;
             }
-            instruction = zsGetAt(func->m_value,i);
+            instruction = zsGetChar(func->m_value,i);
         }
-        z->m_pointer = i;
+        z->m_pointer = 0;
     }
     return z;
 }

@@ -4,8 +4,10 @@
 #include "zbas.h"
 #include "zobject.h"
 
+#include <string.h>
+
 ZSAPI ZObject* zsCreateFunc();
-ZSAPI void zsWriteFunc(ZObject* func,zbas_ptr v);
+
 
 ///
 /// 'var':
