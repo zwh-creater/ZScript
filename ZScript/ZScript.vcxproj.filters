@@ -59,5 +59,8 @@
     <ClInclude Include="include\error.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="ZScript.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

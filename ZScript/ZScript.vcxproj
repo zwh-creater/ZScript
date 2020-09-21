@@ -167,6 +167,7 @@
     <ClInclude Include="include\sys.h" />
     <ClInclude Include="include\zbas.h" />
     <ClInclude Include="include\zobject.h" />
+    <ClInclude Include="ZScript.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

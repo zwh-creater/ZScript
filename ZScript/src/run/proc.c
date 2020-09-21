@@ -15,6 +15,7 @@ ZSAPI ZProc* zsCreateProc(ZObject* func)
             }
             instruction = zsGetChar(func->m_value,i);
         }
+        z->m_func = func;
         z->m_pointer = 0;
     }
     return z;

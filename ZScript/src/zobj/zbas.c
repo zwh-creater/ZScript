@@ -131,7 +131,7 @@ ZSAPI void zsArrayPush(zbas_ptr p, zbas_ptr value_p)
 ZSAPI zbas_ptr zsArrayPop(zbas_ptr p)
 {
 	if (((zbas_array*)p)->m_top > 0) {
-		--((zbas_array*)p)->m_top;
+		((zbas_array*)p)->m_top= ((zbas_array*)p)->m_top-1;
 	}
 	return zsGetAt(p, ((zbas_array*)p)->m_top);
 }
