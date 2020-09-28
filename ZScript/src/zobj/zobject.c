@@ -18,7 +18,7 @@ ZSAPI void zsDeleteObject(ZObject* z)
 		switch (z->m_typecode)
 		{
 		case 'num':
-			PRINT_S("\nDELETE:");
+			PRINT_S("DELETE:");
 			PRINT_F(*(double*)z->m_value);
 			PRINT_S("\n");
 			break;
