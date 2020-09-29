@@ -5,6 +5,7 @@
 #include <malloc.h>
 #include "def.h"
 
+typedef unsigned char zbas_byte;
 typedef unsigned int zbas_uint;
 typedef char* zbas_ptr;
 typedef unsigned char zbas_bool;

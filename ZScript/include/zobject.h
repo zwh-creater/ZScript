@@ -46,4 +46,6 @@ ZSAPI void zsAddNumbers(ZObject* z,ZObject* a, ZObject* b);
 //ZSAPI ZObject* zsDivNumbers(ZObject* a, ZObject* b);
 //ZSAPI ZObject* zsExpNumber(ZObject* a);
 
+ZSAPI ZObject* zsCreateStringObject(const char* str);
+
 #endif

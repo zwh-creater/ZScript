@@ -25,6 +25,9 @@ ZSAPI void zsDeleteObject(ZObject* z)
 		case 'func':
 			zsDeleteArray(z->m_value);
 			break;
+		case 'str':
+			zsDeleteString(z->m_value);
+			break;
 		default:
 			break;
 		}
@@ -62,5 +65,16 @@ ZSAPI void zsCopyNumber(ZObject* dst, ZObject* src)
 ZSAPI void zsAddNumbers(ZObject* z,ZObject* a, ZObject* b)
 {
 	(*(double*)z->m_value) = (*(double*)a->m_value)+(*(double*)b->m_value);
+}
+
+ZSAPI ZObject* zsCreateStringObject(const char* str)
+{
+	ZS_CREATE(z, ZObject);
+	if (z) {
+		z->m_typecode = 'str';
+		z->m_value = zsCreateString(256);
+		return z;
+	}
+	return NULL;
 }
 

@@ -8,6 +8,8 @@
 #include "func.h"
 
 typedef struct {
+	zbas_ptr m_labels_start;
+	zbas_ptr m_labels_end;
 	zbas_ptr m_vars;
 	zbas_uint m_pointer;
 	ZObject* m_func;
@@ -17,5 +19,9 @@ ZSAPI ZProc* zsCreateProc(ZObject* func);
 ZSAPI void zsAppendVar(ZProc* proc,ZObject* p);
 ZSAPI void zsDeleteProc(ZProc* proc);
 ZSAPI ZObject* zsGetVar(ZProc* proc,zbas_uint n);
+
+ZSAPI ZObject* zsGetVarBack(ZProc* proc, zbas_uint n);
+
+ZSAPI void zsResetVarTop(ZProc* proc, zbas_uint n, ZObject* z);
 
 #endif
