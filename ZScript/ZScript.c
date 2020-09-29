@@ -3,6 +3,7 @@
 #include "include/zobject.h"
 #include "include/proc.h"
 #include "ZScript.h"
+#include <math.h>
 
 typedef struct {
 	ZObject* m_return_value;
@@ -145,14 +146,13 @@ zbas_uint zsComplie(zbas_ptr func, zbas_ptr text,zbas_uint s,zbas_uint n)
 	char str[32];
 	char right[256];
 	int strcount=0;
-	printf(" begin ");
-	for (int i = s; i < n; i++)
+	for (zbas_uint i = s; i < n; i++)
 	{
 		printf(" %c", text[i]);
 		switch (state)
 		{
 		case 'head':
-			if ((text[i] >= 'a' && text[i] <= 'z') || (text[i] >= '0' && text[i] <= '9')||text[i]=='.')
+			if ((text[i] >= 'a' && text[i] <= 'z') || (text[i] >= '0' && text[i] <= '9')||text[i]=='.'||text[i]=='$')
 			{
 				str[strcount++] = text[i];
 			}
@@ -173,7 +173,7 @@ zbas_uint zsComplie(zbas_ptr func, zbas_ptr text,zbas_uint s,zbas_uint n)
 				zsWriteFunc(func, "[o=", 3);
 				zsWriteFunc(func, str, strlen(str));
 				zsWriteFunc(func, "]", 1);
-				return i;
+				return i-1;
 			default:
 				break;
 			}
@@ -186,14 +186,11 @@ zbas_uint zsComplie(zbas_ptr func, zbas_ptr text,zbas_uint s,zbas_uint n)
 				zsWriteFunc(func, "]", 1);
 				return i;
 			}
-			i = zsComplie(func, text, i,n);
-			if (text[i] == ')')
+			if (text[i] == ',')
 			{
-				zsWriteFunc(func, "[f=", 3);
-				zsWriteFunc(func, str, strlen(str));
-				zsWriteFunc(func, "]", 1);
-				return i;
+				i++;
 			}
+			i = zsComplie(func, text, i,n);
 			break;
 		}
 	}
@@ -224,6 +221,69 @@ double zsAtof(const char* str,int sv_count)
 	return sv_number;
 }
 
+void add(ZProc* proc)
+{
+	zsAddNumbers(zsGetVarBack(proc, 2), zsGetVarBack(proc, 2), zsGetVarBack(proc, 1));
+}
+void sub(ZProc* proc)
+{
+	zsSubNumbers(zsGetVarBack(proc, 2), zsGetVarBack(proc, 2), zsGetVarBack(proc, 1));
+}
+void mul(ZProc* proc)
+{
+	zsMulNumbers(zsGetVarBack(proc, 2), zsGetVarBack(proc, 2), zsGetVarBack(proc, 1));
+}
+void _div(ZProc* proc)
+{
+	zsDivNumbers(zsGetVarBack(proc, 2), zsGetVarBack(proc, 2), zsGetVarBack(proc, 1));
+}
+
+void sqrt_tmp(ZProc* proc) {
+	ZObject* z=zsGetVarBack(proc, 1);
+	*(double*)z->m_value = sqrt(*(double*)z->m_value);
+}
+
+typedef struct {
+	zbas_ptr m_start;
+	zbas_ptr m_end;
+}MainApp;
+
+MainApp g_App;
+
+void GlobalAppend(const char* name,ZObject* value)
+{
+	ZS_CREATE(lb, ZLabel);
+	lb->m_name = malloc(strlen(name));
+	strcpy(lb->m_name, name);
+	lb->m_object = value;
+	g_App.m_end = zsChainPush(g_App.m_end, lb);
+}
+
+ZObject* GlobalFind(const char* name)
+{
+	ZS_BEGIN_ITER(iter,g_App.m_start)
+		if (iter->m_value != NULL)
+		{
+			if (0==strcmp(((ZLabel*)iter->m_value)->m_name, name))
+			{
+				return ((ZLabel*)iter->m_value)->m_object;
+			}
+		}
+	ZS_END_ITER(iter)
+	return NULL;
+}
+
+void ShowList()
+{
+	ZS_BEGIN_ITER(iter, g_App.m_start)
+		if (iter->m_value != NULL)
+		{
+			printf(((ZLabel*)iter->m_value)->m_name);
+			printf("=");
+			printf("%lf\n", *(double*)((ZObject*)((ZLabel*)iter->m_value)->m_object)->m_value);
+		}
+	ZS_END_ITER(iter)
+}
 
 int exec(ZProc* proc)
 {
@@ -232,11 +292,25 @@ int exec(ZProc* proc)
 	int state='out';
 	char save[32];
 	int sv_count = 0;
+	printf("\n================RUNTIME====================\n");
+	ZCFunctionStruct funcstr[20];
+	funcstr[0].func = add;
+	funcstr[0].argn = 2;
+	funcstr[1].func = sub;
+	funcstr[1].argn = 2;
+	funcstr[2].func = mul;
+	funcstr[2].argn = 2;
+	funcstr[3].func = _div;
+	funcstr[3].argn = 2;
+	funcstr[4].func = sqrt_tmp;
+	funcstr[4].argn = 1;
 	for (zbas_uint i = 0; i < 256; i++)
 	{
 		c = ((zbas_lpstr)func->m_value)->m_data[i];
-		if (c == '$')
+		if (c == 0) {
+			printf("\n================END====================\n");
 			return 0;
+		}
 		switch (state)
 		{
 		case 'out':
@@ -271,6 +345,13 @@ int exec(ZProc* proc)
 			{
 				zsAppendVar(proc, zsCreateNumber(zsAtof(save, sv_count)));
 			}
+			else {
+				if (GlobalFind(save) != NULL)
+					zsAppendVar(proc,zsCreateNumber(*(double*)GlobalFind(save)->m_value));
+				else
+					GlobalAppend(save, zsCreateNumber(*(double*)zsPopVar(proc)->m_value));
+
+			}
 			sv_count = 0;
 			state = 'out';
 			break;
@@ -290,31 +371,83 @@ int exec(ZProc* proc)
 			}
 			break;
 		case 'endf':
-			if (strcmp(save, "add")==0)
-			{
-				zsAddNumbers(zsGetVarBack(proc,1),zsGetVarBack(proc, 1), zsGetVarBack(proc, 2));
-				zsResetVarTop(proc, 2, zsGetVarBack(proc, 1));
+			
+			if (strcmp(save, "put") == 0) {
+				printf("\n**********高**级**输**出*************************\nNumber = %f\n*************************************************\n",*(double*)zsGetVarBack(proc, 1)->m_value);
+				zsDeleteObject(zsPopVar(proc));
+			}
+			else if (strcmp(save, "get") == 0) {
+				printf("高级输入:");
+				double flt;
+				while (1 != scanf("%lf", &flt))
+				{
+					printf("错了，你要输入小数才对。\n");
+				}
+				zsAppendVar(proc, zsCreateNumber(flt));
+			}
+			else if (strcmp(save, "add") == 0) {
+				CallCFunction(proc, &funcstr[0]);
+			}
+			else if (strcmp(save, "sub") == 0) {
+				CallCFunction(proc, &funcstr[1]);
+			}
+			else if (strcmp(save, "mul") == 0) {
+				CallCFunction(proc, &funcstr[2]);
+			}
+			else if (strcmp(save, "div") == 0) {
+				CallCFunction(proc, &funcstr[3]);
+			}
+			else if (strcmp(save, "sqrt") == 0) {
+				CallCFunction(proc, &funcstr[4]);
 			}
 			sv_count = 0;
 			state = 'out';
 			break;
 		}
 	}
+	return 0;
 }
 
-int main()
+void LoadFile(ZObject* func,const char* filename)
 {
-	char* text = "add(01223.5,07765)";
+	FILE* file=fopen(filename,"r");
+	if (file == NULL)
+		return;
+	char text[256];
+	while (!feof(file))
+	{
+		if(1==fscanf(file, "%s", text))
+			zsComplie(func, text, 0, strlen(text));
+	}
+	zsWriteFunc(func, "$", 2);
+}
+
+int main(int argn,char** args)
+{
+	char  filename[128];
+	if (argn > 1) {
+		strcpy(filename, args[1]);
+		printf(args[1]);
+		printf("\n");
+	}
+	else {
+		strcpy(filename, "test.zs");
+	}
+
+	g_App.m_start = zsCreateNode(0);
+	g_App.m_end = g_App.m_start;
 
 	ZObject* func = zsCreateFunc();
-	zsComplie(func, text, 0,strlen(text));
-	zsWriteFunc(func, "$", 1);
-
+	LoadFile(func,filename);
 	ZProc* proc = zsCreateProc(func);
-	exec(proc);
 	printf(((zbas_lpstr)func->m_value)->m_data);
+
+	exec(proc);
+	
 	zsDeleteProc(proc);
 	zsDeleteObject(func);
+
+	getchar();
 
 	return 0;
 }

@@ -67,6 +67,21 @@ ZSAPI void zsAddNumbers(ZObject* z,ZObject* a, ZObject* b)
 	(*(double*)z->m_value) = (*(double*)a->m_value)+(*(double*)b->m_value);
 }
 
+ZSAPI void zsSubNumbers(ZObject* z, ZObject* a, ZObject* b)
+{
+	(*(double*)z->m_value) = (*(double*)a->m_value) - (*(double*)b->m_value);
+}
+
+ZSAPI void zsMulNumbers(ZObject* z, ZObject* a, ZObject* b)
+{
+	(*(double*)z->m_value) = (*(double*)a->m_value) * (*(double*)b->m_value);
+}
+
+ZSAPI void zsDivNumbers(ZObject* z, ZObject* a, ZObject* b)
+{
+	(*(double*)z->m_value) = (*(double*)a->m_value) / (*(double*)b->m_value);
+}
+
 ZSAPI ZObject* zsCreateStringObject(const char* str)
 {
 	ZS_CREATE(z, ZObject);

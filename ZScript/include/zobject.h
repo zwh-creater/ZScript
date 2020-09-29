@@ -27,7 +27,7 @@ typedef struct
 
 typedef struct
 {
-	zbas_string m_name;
+	zbas_ptr m_name;
 	zbas_ptr m_object;
 }ZLabel;
 
@@ -41,6 +41,9 @@ ZSAPI double zsGetNumber(ZObject* z);
 ZSAPI void zsSetNumber(ZObject* z,double number);
 ZSAPI void zsCopyNumber(ZObject* dst,ZObject* src);
 ZSAPI void zsAddNumbers(ZObject* z,ZObject* a, ZObject* b);
+ZSAPI void zsSubNumbers(ZObject* z, ZObject* a, ZObject* b);
+ZSAPI void zsMulNumbers(ZObject* z, ZObject* a, ZObject* b);
+ZSAPI void zsDivNumbers(ZObject* z, ZObject* a, ZObject* b);
 //ZSAPI ZObject* zsSubNumbers(ZObject* a, ZObject* b);
 //ZSAPI ZObject* zsMulNumbers(ZObject* a, ZObject* b);
 //ZSAPI ZObject* zsDivNumbers(ZObject* a, ZObject* b);

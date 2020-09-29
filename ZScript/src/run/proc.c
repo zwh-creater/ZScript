@@ -62,3 +62,17 @@ ZSAPI void zsResetVarTop(ZProc* proc, zbas_uint n,ZObject* z)
     ((zbas_array*)proc->m_vars)->m_top -= n;
     zsAppendVar(proc, z);
 }
+
+ZSAPI ZObject* zsPopVar(ZProc* proc)
+{
+    PRINT_S("zs_pop...");
+   return zsGetAt(proc->m_vars,--((zbas_array*)proc->m_vars)->m_top);
+}
+
+void CallCFunction(ZProc* proc, ZCFunctionStruct* funcstr)
+{
+    funcstr->func(proc);
+    for (int i = 1; i < funcstr->argn; i++)
+        zsDeleteObject(zsPopVar(proc));
+    zsResetVarTop(proc, 1, zsGetVarBack(proc, 1));
+}

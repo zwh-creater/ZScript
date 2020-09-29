@@ -24,4 +24,15 @@ ZSAPI ZObject* zsGetVarBack(ZProc* proc, zbas_uint n);
 
 ZSAPI void zsResetVarTop(ZProc* proc, zbas_uint n, ZObject* z);
 
+ZSAPI ZObject* zsPopVar(ZProc* proc);
+
+typedef void (*ZCFunction)(ZObject**);
+
+typedef struct {
+	ZCFunction func;
+	zbas_uint argn;
+}ZCFunctionStruct;
+
+void CallCFunction(ZProc* proc, ZCFunctionStruct* funcstr);
+
 #endif
