@@ -33,6 +33,12 @@
     <ClCompile Include="src\run\proc.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\zobj\myhash.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\link\link.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\zobject.h">
@@ -62,5 +68,16 @@
     <ClInclude Include="ZScript.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="include\myhash.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\link.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="文本.txt">
+      <Filter>资源文件</Filter>
+    </Text>
   </ItemGroup>
 </Project>

@@ -34,6 +34,8 @@ typedef struct
 ZSAPI ZObject* zsCreateObject(zbas_ptr typecode);
 ZSAPI void zsDeleteObject(ZObject* z);
 
+ZSAPI void zsChangeObject(ZObject** object, ZObject* n_object);
+
 //ZSAPI void zsSetLabel(ZLabel* a,ZObject* b);
 
 ZSAPI ZObject* zsCreateNumber(double number);
@@ -50,5 +52,7 @@ ZSAPI void zsDivNumbers(ZObject* z, ZObject* a, ZObject* b);
 //ZSAPI ZObject* zsExpNumber(ZObject* a);
 
 ZSAPI ZObject* zsCreateStringObject(const char* str);
+
+ZSAPI ZObject* zsCreatePointer(ZObject* object);
 
 #endif

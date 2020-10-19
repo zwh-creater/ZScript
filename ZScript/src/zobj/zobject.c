@@ -36,6 +36,12 @@ ZSAPI void zsDeleteObject(ZObject* z)
 	}
 }
 
+ZSAPI void zsChangeObject(ZObject** object, ZObject* n_object)
+{
+	zsDeleteObject(*object);
+	(*object) = n_object;
+}
+
 ZSAPI ZObject* zsCreateNumber(double number)
 {
 	ZS_CREATE(z, ZObject);
@@ -88,6 +94,17 @@ ZSAPI ZObject* zsCreateStringObject(const char* str)
 	if (z) {
 		z->m_typecode = 'str';
 		z->m_value = zsCreateString(256);
+		return z;
+	}
+	return NULL;
+}
+
+ZSAPI ZObject* zsCreatePointer(ZObject* object)
+{
+	ZS_CREATE(z, ZObject);
+	if (z) {
+		z->m_typecode = 'ptr';
+		z->m_value =object;
 		return z;
 	}
 	return NULL;

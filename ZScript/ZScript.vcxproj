@@ -151,9 +151,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\link\link.c" />
     <ClCompile Include="src\run\func.c" />
     <ClCompile Include="src\run\proc.c" />
     <ClCompile Include="src\run\run.c" />
+    <ClCompile Include="src\zobj\myhash.c" />
     <ClCompile Include="src\zobj\zbas.c" />
     <ClCompile Include="src\zobj\zobject.c" />
     <ClCompile Include="ZScript.c" />
@@ -162,12 +164,17 @@
     <ClInclude Include="include\def.h" />
     <ClInclude Include="include\error.h" />
     <ClInclude Include="include\func.h" />
+    <ClInclude Include="include\link.h" />
+    <ClInclude Include="include\myhash.h" />
     <ClInclude Include="include\proc.h" />
     <ClInclude Include="include\run.h" />
     <ClInclude Include="include\sys.h" />
     <ClInclude Include="include\zbas.h" />
     <ClInclude Include="include\zobject.h" />
     <ClInclude Include="ZScript.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="文本.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
