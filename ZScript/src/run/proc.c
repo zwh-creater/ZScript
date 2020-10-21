@@ -1,4 +1,4 @@
-#include "../../include/proc.h"
+#include "../../include/zs/proc.h"
 
 ZSAPI ZProc* zsCreateProc(ZObject* func)
 {

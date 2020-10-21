@@ -3,6 +3,7 @@
 
 #include "def.h"
 #include "zbas.h"
+#include "myhash.h"
 #include "error.h"
 
 /// 
@@ -16,7 +17,7 @@
 /// 'int'		Integer Type
 /// 'user'		User Type
 /// 'xxxx'		Other Type
-/// 
+/// 'nms'		Namespace Object
 
 typedef struct
 {
@@ -54,5 +55,13 @@ ZSAPI void zsDivNumbers(ZObject* z, ZObject* a, ZObject* b);
 ZSAPI ZObject* zsCreateStringObject(const char* str);
 
 ZSAPI ZObject* zsCreatePointer(ZObject* object);
+
+ZSAPI ZObject* zsCreateNameSpace(MYHASHPOSITIONTYPE size);
+
+ZSAPI ZObject* zsDeleteNameSpace(ZObject* z);
+
+ZSAPI void zsNameSpaceInsert(ZObject* hash, const char* name, ZObject* value);
+
+ZSAPI ZObject* zsNameSpaceLookUp(ZObject* hash, const char* name);
 
 #endif

@@ -1,4 +1,4 @@
-#include "../../include/zobject.h"
+#include "../../include/zs/zobject.h"
 
 ZSAPI ZObject* zsCreateObject(zbas_ptr typecode)
 {
@@ -108,5 +108,39 @@ ZSAPI ZObject* zsCreatePointer(ZObject* object)
 		return z;
 	}
 	return NULL;
+}
+
+ZSAPI ZObject* zsCreateNameSpace(MYHASHPOSITIONTYPE size)
+{
+	MYHASH* mh = MyHashCreate(size);
+	ZS_CREATE(z, ZObject);
+	if (z != NULL)
+	{
+		z->m_typecode = 'nms';
+		z->m_value = (zbas_ptr)mh;
+		return z;
+	}
+	return NULL;
+}
+
+ZSAPI ZObject* zsDeleteNameSpace(ZObject* z)
+{
+	if (z != NULL)
+	{
+		if (z->m_typecode == 'nms')
+		{
+			MyHashDelete(z->m_value);
+		}
+	}
+}
+
+ZSAPI void zsNameSpaceInsert(ZObject* hash, const char* name, ZObject* value)
+{
+	MyHashInsert((MYHASH*)hash->m_value, name, (char*)value);
+}
+
+ZSAPI ZObject* zsNameSpaceLookUp(ZObject* hash, const char* name)
+{
+	return (ZObject*)MyHashLookUp((MYHASH*)hash->m_value, name);
 }
 

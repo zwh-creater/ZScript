@@ -1,4 +1,4 @@
-#include "../../include/zbas.h"
+#include "../../include/zs/zbas.h"
 
 ZSAPI zbas_lpstr zsCreateString(zbas_uint n)
 {

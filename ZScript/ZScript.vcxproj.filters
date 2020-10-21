@@ -36,48 +36,51 @@
     <ClCompile Include="src\zobj\myhash.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\link\link.c">
+    <ClCompile Include="src\zobj\expr.c">
       <Filter>源文件</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="include\zobject.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="include\def.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="include\zbas.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="include\sys.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="include\run.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="include\func.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="include\proc.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="include\error.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ZScript.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="include\myhash.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="include\link.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="文本.txt">
       <Filter>资源文件</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\zs\def.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\zs\error.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\zs\expr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\zs\func.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\zs\link.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\zs\myhash.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\zs\proc.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\zs\run.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\zs\sys.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\zs\zbas.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\zs\zobject.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\zs\ZScript.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

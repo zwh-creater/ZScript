@@ -1,4 +1,4 @@
-#include "../../include/myhash.h"
+#include "../../include/zs/myhash.h"
 
 MYHASH* MyHashCreate(MYHASHPOSITIONTYPE size)
 {
@@ -16,7 +16,6 @@ void MyHashDelete(MYHASH* mh)
 	{
 		if (mh->data[pos] != 0)
 		{
-			printf(";delete:%s;", ((MYHASHELEMENT*)mh->data[pos])->name);
 			free(((MYHASHELEMENT*)mh->data[pos])->name);
 			free(mh->data[pos]);
 		}
@@ -60,17 +59,14 @@ char MyHashInsert(MYHASH* mh, const char* name, char* value)
 
 char* MyHashLookUp(MYHASH* mh, const char* name)
 {
-	int cizshu = 0;
 	MYHASHELEMENT* ele = 0;
 	for (MYHASHPOSITIONTYPE pos = 0; pos < mh->size; pos++)
 	{
-		cizshu++;
 		ele = (MYHASHELEMENT*)mh->data[(pos + MyHashGetKey(name)) % mh->size];
 		if (ele != 0)
 		{
 			if (strcmp(ele->name, name) == 0)
 			{
-				printf("nnn\n%d=nnn", cizshu);
 				return ele->pvalue;
 			}
 		}

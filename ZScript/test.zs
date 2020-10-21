@@ -1,8 +1,0 @@
-$(get(),a)
-$(get(),b)
-$(get(),c)
-$(sub(mul(b,b),mul(04,mul(a,c))),delta)
-put(delta)
-$(delta,a)
-put(a)
-get()

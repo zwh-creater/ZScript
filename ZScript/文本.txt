@@ -465,3 +465,124 @@ int main(int argn,char** args)
 
 	return 0;
 }
+
+#include <stdio.h>
+#include "include/ZScript.h"
+
+/// <summary>
+/// 
+/// </summary>
+/// <returns></returns>
+
+typedef void (*cmdfunc)(const char* str);
+
+ZObject* local;
+zbas_array* stack_data;
+zbas_array* stack_code;
+zbas_array* stack_label;
+
+double zsAtof(const char* str, int sv_count)
+{
+	double sv_number = 0.0;
+	char after_dot = 0;
+	int w = 0;
+	for (int i = 0; i < sv_count; i++)
+	{
+		if (str[i] == '.') {
+			after_dot = 1;
+		}
+		else if (str[i] == '-') {
+			sv_number = -sv_number;
+		}
+		else if (str[i] < '0' || str[i]>'9')
+		{
+			return sv_number;
+		}
+		else if (after_dot) {
+			sv_number = sv_number + (str[i] - '0') * 1.0 / (10 ^ (w++));
+		}
+		else {
+			sv_number = sv_number * 10 + (str[i] - '0') * 1.0;
+		}
+	}
+	return sv_number;
+}
+
+void new_number(const char* str)
+{
+	printf("new float:%s\n", str);
+	zsArrayPush(stack_data,zsCreateNumber(zsAtof(str,32)));
+}
+
+void add_up(const char* str)
+{
+	double a, b;
+	ZObject* tmp=zsArrayPop(stack_data);
+	a = zsGetNumber(tmp);
+	zsDeleteObject(tmp);
+	tmp = zsArrayPop(stack_data);
+	b = zsGetNumber(tmp);
+	zsDeleteObject(tmp);
+	zsArrayPush(stack_data, zsCreateNumber(a+b));
+}
+
+void get_value(const char* str)
+{
+	zsArrayPush(stack_data, zsNameSpaceLookUp(local, str));
+}
+
+void set_as(const char* str)
+{
+	ZObject* a=zsArrayPop(stack_data);
+	printf("Create New Value: %s = %lf\n",str,zsGetNumber(a));
+	zsNameSpaceInsert(local, str, a);
+}
+void create_label(const char* str)
+{
+	printf("Create Label: %s\n", str);
+}
+void jump_label(const char* str)
+{
+	printf("Goto...\n");
+}
+void delete_value(const char* str)
+{
+	printf("Create New Value: %s\n", str);
+}
+
+
+int main()
+{
+	local = zsCreateNameSpace(256);
+	stack_data = zsCreateArray(256);
+	stack_code = zsCreateArray(256);
+	stack_label = zsCreateArray(256);
+	while(1)aaa(local);
+	return 0;
+}
+int aaa(ZObject* local)
+{
+	char input[32];
+	int input_count = 0;
+	char args[256];
+	int args_count = 0;
+	char c;
+	while ((c = getchar()) != ' ')
+	{
+		input[input_count++] = c;
+	}
+	input[input_count++] = 0;
+	while ((c = getchar()) != '\n')
+	{
+		args[args_count++] = c;
+	}
+	args[args_count++] = 0;
+	MYHASH* cmds = MyHashCreate(256);
+	MyHashInsert(cmds, "set_as", set_as);
+	MyHashInsert(cmds, "new_number", new_number);
+	MyHashInsert(cmds, "get_value", get_value);
+	MyHashInsert(cmds, "add_up", add_up);
+	
+	cmdfunc func=((cmdfunc)MyHashLookUp(cmds, input));
+	if(func!=0)func(args);
+}
